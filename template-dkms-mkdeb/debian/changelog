@@ -1,4 +1,4 @@
-DEBIAN_PACKAGE-dkms (MODULE_VERSION) stable; urgency=low
+kmod-DEBIAN_PACKAGE (MODULE_VERSION-KERNEL_VERSION) stable; urgency=low
 
   * Automatically packaged by DKMS.
 

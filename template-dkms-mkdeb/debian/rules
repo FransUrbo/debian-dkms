@@ -7,6 +7,8 @@
 DEB_NAME=DEBIAN_PACKAGE
 NAME=MODULE_NAME
 VERSION=MODULE_VERSION
+ARCH=SYSTEM_ARCH
+KVER=KERNEL_VERSION
 
 configure: configure-stamp
 configure-stamp:
@@ -15,7 +17,6 @@ configure-stamp:
 
 
 build: build-stamp
-
 build-stamp: configure-stamp 
 	dh_testdir
 	$(MAKE)
@@ -33,7 +34,11 @@ install: build
 	dh_testroot
 	dh_prep
 	dh_installdirs
-	$(MAKE) DESTDIR=$(CURDIR)/debian/$(DEB_NAME)-dkms NAME=$(NAME) VERSION=$(VERSION) install
+#	$(MAKE) DESTDIR=$(CURDIR)/debian/$(DEB_NAME)-dkms NAME=$(NAME) VERSION=$(VERSION) install
+	cd $(CURDIR)/debian/kmod-$(NAME) && \
+	  tar xvzf $(CURDIR)/$(NAME)-$(VERSION).dkms.tar.gz && \
+	  mv dkms_main_tree/$(KVER)/$(ARCH)/module/* lib/modules/$(KVER)/extra/$(NAME)/ && \
+	  rm -vRf dkms_binaries_only dkms_main_tree
 
 binary-arch: build install
 

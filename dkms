@@ -2849,6 +2849,8 @@ preproc_file()
     sed -e "s/DEBIAN_PACKAGE/$debian_package/g" \
 	-e "s/MODULE_NAME/$module/g" \
 	-e "s/MODULE_VERSION/$module_version/g" \
+	-e "s/KERNEL_VERSION/$kernelver/g" \
+	-e "s/SYSTEM_ARCH/$arch/g" \
 	-e "s/DATE_STAMP/$date_str/" "$1" > "$1.dkms-pp"
     mv "$1.dkms-pp" "$1"
 }
@@ -2975,7 +2977,7 @@ make_debian()
 		die 7 $"There was a problem creating your ${create_type}."
 	    echo $""
 	    echo $"DKMS: mk${create_type} completed."
-	    invoke_command "mv '$temp_dir/${debian_package}-dkms_${module_version}_all.deb' '$deb_basedir'" "Moving built files to $deb_basedir"
+	    invoke_command "mv $temp_dir/*.deb '$deb_basedir'" "Moving built files to $deb_basedir"
 	    ;;
     esac
     popd > /dev/null 2>&1
@@ -3455,7 +3457,7 @@ while (($# > 0)); do
 	--templatekernel*)   read_arg template_kernel "$1" "$2" || shift;;
 	-c)                  read_arg conf "$1" "$2" || shift;;
 	--quiet|-q)          exec >/dev/null 2>&1;;
-	--version|-V)        echo $"dkms: [INSERT_VERSION_HERE]"
+	--version|-V)        echo $"dkms: 2.2.0.3"
 			     exit 0;;
 	--no-prepare-kernel) no_prepare_kernel="no-prepare-kernel";;
 	--no-clean-kernel)   no_clean_kernel="no-clean-kernel";;

@@ -1,3 +1,11 @@
+dkms (2.2.0.1-0ubuntu1.tf.1) oneiric; urgency=low
+
+  * Support global KERNEL_VERSION and SYSTEM_ARCH.
+  * Actually _build_ a real kernel module package, not just tar it inside
+    a package!
+
+ -- Turbo Fredriksson <turbo@bayour.com>  Tue, 07 May 2013 15:37:19 +0200
+
 dkms (2.2.0.1-0ubuntu1) oneiric; urgency=low
 
   * New upstream version.  Bugs fixed in Ubuntu:
